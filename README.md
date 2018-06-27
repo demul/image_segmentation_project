@@ -140,4 +140,4 @@ Validation IOU가 20% 언저리에서 30% 언저리까지 올랐을 뿐 여전�
 
 ### 2.6.4.Fail
 모든 1x1 Convolution layer의 가중치를 0으로 초기화해보는 방법을 실험해 본 결과 모든 1x1 Convolution layer의 가중치가 0에서 전혀 갱신되지 않는다!
-아무래도 가중치를 0으로 초기화하면 안 되는 것 같다. 아무래도 내가 논문을 오독한 것 같다. Scoring layer를 1x1 Convolution Layer로 이해하고 있었는데 그게 아닌 것 같다. 일단 이 부분을 다시 확인해봐야 할 것 같다. 그리고 일단 모든 1x1 Convolution Layer를 Random initialize한 결과를 봐야겠다. (아마 잘 될듯하다. 물론 이게 목적은 아니지만 일단 잘 된 결과가 어떤지 보고 )
+아무래도 가중치를 0으로 초기화하면 안 되는 것 같다. 아무래도 내가 논문을 오독한 것 같다. Scoring layer를 1x1 Convolution Layer로 이해하고 있었는데 그게 아닌 것 같다. 일단 이 부분을 다시 확인해봐야 할 것 같다. 그리고 일단 모든 1x1 Convolution Layer를 Random initialize한 결과를 봐야겠다. (아마 잘 될듯하다. 물론 이게 목적은 아니지만 일단 잘 된 결과가 어떤지 보고싶다.)
