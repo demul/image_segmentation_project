@@ -83,7 +83,7 @@ GTX1080에서 배치사이즈 15로 놓고 학습시키다가 컴퓨터 파워�
 
 ## 2.5.Fail(...)
 
-Training Loss는 계속 줄어드는데 Validation IOU가 원체 늘지를 않는다. 그냥 Training data에만 계속 오버피팅되고 있다. Tensorflow KR에 도움도 구해보고 개인적으로 이런저런 자료를 찾아봤지만 아무래도 데이터가 적은 것이 원인인 것 같다. PASCAL VOC의 클래스는 20개, Training data는 1800개 정도이다. 클래스 당 90개면 적긴 한 것 같다. 일반적으로 Semantic segmentation이 일반 Image classifacation보다 데이터가 더 많이 필요할 것 같기도 하고.
+Training Loss는 계속 줄어드는데 Validation IOU가 20% 언저리에서 원체 늘지를 않는다. 그냥 Training data에만 계속 오버피팅되고 있다. Tensorflow KR에 도움도 구해보고 개인적으로 이런저런 자료를 찾아봤지만 아무래도 데이터가 적은 것이 원인인 것 같다. PASCAL VOC의 클래스는 20개, Training data는 1800개 정도이다. 클래스 당 90개면 적긴 한 것 같다. 일반적으로 Semantic segmentation이 일반 Image classifacation보다 데이터가 더 많이 필요할 것 같기도 하고.
 확실히 단순히 시간만 많이 투자해서 에폭 많이 돌린다고 Training from scratch가 되는 것 같진 않다. 논문은 Fine-tune된 앞단을 가져다 썼기 때문에  이 정도 데이터만으로도 어느정도 결과가 나왔던 것으로 보인다.
 
 
@@ -115,3 +115,25 @@ MS-COCO로부터 PASCAL VOC와 겹치는 클래스들만 따로 추출해서 900
 
 
 
+### 2.6.1.Fail
+
+Validation IOU가 20% 언저리에서 30% 언저리까지 올랐을 뿐 여전히 형편없었다. 뭔가 다른 원인이 있는 것 같다. 그래서 그냥 VGG16에서 가중치를 가져와서 학습시켜보고 원인이 뭔지 다시 찾아보기로 한다.
+
+### 2.6.2.Fail
+
+또 실패했다. 여전히 30% 언저리에서 오르지 않는다. 디버깅 결과 1x1 Convolution layer의 가중치들이 전부 0에서 학습이 전혀 되지 않고 있었고 그 결과 마지막 Pooling layer(pool5)에서 나온 가중치는 전혀 사용하지 않고 그냥 pool4로부터 스킵연결해서 가져온 텐서로만 Upsample, Prediction하고 있었다.(...) 
+
+### 2.6.3.Two Hypothesizing
+원인을 생각해보니 두 가지 부분에서 논문의 구현을 따르지 않아 문제가 발생한 것 같다. 
+
+
+
+첫 번째 의심가는 부분은, 논문은 FCN-32s부터 학습시키고 이후 뒤에 레이어를 붙여 FCN-16s, FCN-8s순으로 학습시켰는데 나는 그냥 바로 FCN-8s를 학습시키려고 했다.
+
+
+
+두 번째 의심가는 부분은, 내 코드를 찬찬히 들여다 보니 나는 다른 1x1 Convolution Layer 가중치는 0으로 초기화했는데 스킵연결해온 pool4 뒤에 붙는 1x1 Convolution Layer의 가중치는 0으로 초기화하지 않았다. 
+
+
+
+두 가지 실험을 해보기로 한다. 하나는 FCN-32s를 일단 학습시키고 16s, 8s를 차례대로 전이학습시키며 잘 되는지 보는 실험. 또 하나는 현재 구조(FCN-8s)를 유지하되 모든 1x1 Convolution layer의 가중치를 0으로 초기화해보는 방법이다. 두 실험을 모두 수행해봐야 무엇이 구현에 있어 큰 문제가 지 알 수 있을 것이다.
