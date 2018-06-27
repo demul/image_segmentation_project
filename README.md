@@ -132,8 +132,12 @@ Validation IOU가 20% 언저리에서 30% 언저리까지 올랐을 뿐 여전�
 
 
 
-두 번째 의심가는 부분은, 내 코드를 찬찬히 들여다 보니 나는 다른 1x1 Convolution Layer 가중치는 0으로 초기화했는데 스킵연결해온 pool4 뒤에 붙는 1x1 Convolution Layer의 가중치는 0으로 초기화하지 않았다. 
+두 번째 의심가는 부분은, 내 코드를 찬찬히 들여다 보니 나는 다른 1x1 Convolution Layer 가중치는 0으로 초기화했는데 스킵연결해온 pool4 뒤에 붙는 1x1 Convolution Layer의 가중치는 0으로 초기화하지 않았다. 그래서 0으로 초기화하지 않은 스킵연결 쪽 1x1 Convolution Layer만 가중치 갱신이 된다.  
 
 
 
 두 가지 실험을 해보기로 한다. 하나는 FCN-32s를 일단 학습시키고 16s, 8s를 차례대로 전이학습시키며 잘 되는지 보는 실험. 또 하나는 현재 구조(FCN-8s)를 유지하되 모든 1x1 Convolution layer의 가중치를 0으로 초기화해보는 방법이다. 두 실험을 모두 수행해봐야 무엇이 구현에 있어 큰 문제가 되는지 알 수 있을 것이다. 일단 이 문제를 해결하고 다시 Training from scratch로 돌아가기로 한다. 
+
+### 2.6.4.Fail
+모든 1x1 Convolution layer의 가중치를 0으로 초기화해보는 방법을 실험해 본 결과 모든 1x1 Convolution layer의 가중치가 0에서 전혀 갱신되지 않는다!
+아무래도 가중치를 0으로 초기화하면 안 되는 것 같다. 아무래도 내가 논문을 오독한 것 같다. Scoring layer를 1x1 Convolution Layer로 이해하고 있었는데 그게 아닌 것 같다. 일단 이 부분을 다시 확인해봐야 할 것 같다. 그리고 일단 모든 1x1 Convolution Layer를 Random initialize한 결과를 봐야겠다. (아마 잘 될듯하다. 물론 이게 목적은 아니지만 일단 잘 된 결과가 어떤지 보고 )
