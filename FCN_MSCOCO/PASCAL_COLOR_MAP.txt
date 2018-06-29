@@ -1,0 +1,21 @@
+Label: 0 Color: [0.0, 0.0, 0.0] Class: bg
+Label: 1 Color: [128.0, 0.0, 0.0] Class: airplane
+Label: 2 Color: [192.0, 128.0, 128.0] Class: person
+Label: 3 Color: [0.0, 64.0, 128.0] Class: tv
+Label: 4 Color: [192.0, 0.0, 0.0] Class: chair
+Label: 5 Color: [64.0, 0.0, 128.0] Class: dog
+Label: 6 Color: [128.0, 128.0, 0.0] Class: bird
+Label: 7 Color: [128.0, 0.0, 128.0] Class: bottle
+Label: 8 Color: [0.0, 0.0, 128.0] Class: boat
+Label: 9 Color: [192.0, 128.0, 0.0] Class: dining table
+Label: 10 Color: [128.0, 192.0, 0.0] Class: train
+Label: 11 Color: [64.0, 128.0, 128.0] Class: motorcycle
+Label: 12 Color: [192.0, 0.0, 128.0] Class: horse
+Label: 13 Color: [64.0, 128.0, 0.0] Class: cow
+Label: 14 Color: [128.0, 128.0, 128.0] Class: car
+Label: 15 Color: [0.0, 128.0, 0.0] Class: bicycle
+Label: 16 Color: [64.0, 0.0, 0.0] Class: cat
+Label: 17 Color: [0.0, 192.0, 0.0] Class: couch
+Label: 18 Color: [0.0, 128.0, 128.0] Class: bus
+Label: 19 Color: [0.0, 64.0, 0.0] Class: potted plant
+Label: 20 Color: [128.0, 64.0, 0.0] Class: sheep
