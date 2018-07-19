@@ -172,7 +172,7 @@ Validation IOU가 20% 언저리에서 30% 언저리까지 올랐을 뿐 여전�
 
 
 
-Data augmentation도 적용 안했고 Weight initialization도 대충했고 심지어 Weight decay도 안 걸었으며 Initializer는 귀찮아서 Adam을 대충 갖다썼다. MS-COCO로 배치크기 4로 8에폭 (약 2800*8 = 22400회)밖에 안 돌렸다. 이런데도 성능 재현률이 우수한 것이 정말 놀랍다! 그리고 FCN-32s를 일단 학습시키고 16s, 8s를 차례대로 전이학습시키며 잘 되는지 보는 실험은 안 해도 될 것 같다. FCN-8s를 바로 학습시켜도 학습이 잘 진행된다.
+Data augmentation도 적용 안했고 Weight initialization도 대충했고 심지어 Weight decay도 안 걸었으며 Initializer는 귀찮아서 Adam을 대충 갖다썼다. MS-COCO로 배치크기 4로 8에폭 (약 200000회)밖에 안 돌렸다. 이런데도 성능 재현률이 우수한 것이 정말 놀랍다! 그리고 FCN-32s를 일단 학습시키고 16s, 8s를 차례대로 전이학습시키며 잘 되는지 보는 실험은 안 해도 될 것 같다. FCN-8s를 바로 학습시켜도 학습이 잘 진행된다.
 
 ## 2.8.Traning from Scratch
 이제 Traning from Scratch에 도전해보기로 한다.
