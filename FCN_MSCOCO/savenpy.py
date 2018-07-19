@@ -5,8 +5,13 @@ import tensorflow as tf
 import util
 from imageio import imread
 from skimage.transform import resize
+from skimage import color
 from matplotlib.pyplot import imshow, hist, show,figure, subplot, subplots_adjust, setp
 
+
+######################input file name of image u want to predict#########################
+filename = 'aas.jpg'
+#########################################################################################
 
 def save_pred_arr(pred, class_num, filename, is_single = False):
     pred = np.squeeze(pred, axis=3)
@@ -21,6 +26,26 @@ def save_pred_arr(pred, class_num, filename, is_single = False):
 
     np.save(filename, output_batch)
 
+def masking(img, mask, alpha):
+    fg = np.any(mask != [0, 0, 0], axis=2)
+    fg = np.dstack((fg, fg, fg))
+    bg = ~fg
+
+    img_fg = img * fg
+    img_bg = img * bg
+
+    img_hsv = color.rgb2hsv(img_fg)
+    mask_hsv = color.rgb2hsv(mask)
+
+    img_hsv[:, :, 0] = mask_hsv[:, :, 0]
+    img_hsv[:, :, 1] = mask_hsv[:, :, 1] * alpha
+
+    img_fg = color.hsv2rgb(img_hsv)
+
+    img = img_bg + img_fg
+
+    return img
+
 
 batch_size = 1
 image_idx = 15
@@ -33,11 +58,9 @@ FCN = FCN.FCN(batch_size, 0.001)
 # img_loader.run('train') # train or val
 # input_batch, _ = img_loader.nextbatch(batch_size, image_idx)
 
-filename = 'aas'
+input_img = imread(filename)
 
-input_img = imread(filename + '.jpg')
-
-input_batch = resize(input_img[:, :, :], (256, 256, 3), order=1) *255
+input_batch = resize(input_img[:, :, :], (320, 320, 3), order=1) *255
 
 input_batch = np.expand_dims(input_batch, axis=0)
 
@@ -64,6 +87,8 @@ mask = masker.make_mask_from_label(sample2see)
 
 # save_pred_arr(sample2see, class_num ,filename, batch_size==1)
 
+
+
 figure()
 for i in range(batch_size) :
     ax = subplot(batch_size, 3, 3 * i+1)
@@ -83,9 +108,9 @@ for i in range(batch_size) :
 
     ax = subplot(batch_size, 3, 2 * i + 3)
     if (batch_size == 1):
-        imshow((input_batch[i]/255) + mask*0.1)
+        imshow(masking(input_batch[i], mask, 0.8)/255)
     else:
-        imshow((input_batch[i]/255) + mask[i]*0.01)
+        imshow(masking(input_batch[i], mask[i], 0.8)/255)
     ax.set_title('PREDICTION')
     setp(ax.get_xticklabels(), visible=False)
     setp(ax.get_yticklabels(), visible=False)
