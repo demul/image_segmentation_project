@@ -140,4 +140,25 @@ Validation IOU가 20% 언저리에서 30% 언저리까지 올랐을 뿐 여전�
 
 ### 2.6.4.Fail
 모든 1x1 Convolution layer의 가중치를 0으로 초기화해보는 방법을 실험해 본 결과 모든 1x1 Convolution layer의 가중치가 0에서 전혀 갱신되지 않는다!
-아무래도 가중치를 0으로 초기화하면 안 되는 것 같다. 아무래도 내가 논문을 오독한 것 같다. Scoring layer를 1x1 Convolution Layer로 이해하고 있었는데 그게 아닌 것 같다. 일단 이 부분을 다시 확인해봐야 할 것 같다. 그리고 일단 모든 1x1 Convolution Layer를 Random initialize한 결과를 봐야겠다. (아마 잘 될듯하다. 물론 이게 목적은 아니지만 일단 잘 된 결과가 어떤지 보고싶다.)
+아무래도 가중치를 0으로 초기화하면 안 되는 것 같다. 아무래도 내가 논문을 오독한 것 같다. Scoring layer를 1x1 Convolution Layer로 이해하고 있었는데 그게 아닌 것 같다. 일단 이 부분을 다시 확인해봐야 할 것 같다. 그리고 일단 모든 1x1 Convolution layer를 Random initialize한 결과를 봐야겠다. (아마 잘 될듯하다. 물론 이게 목적은 아니지만 일단 잘 된 결과가 어떤지 보고싶다.)
+
+
+### 2.6.5.Fail
+모든 1x1 Convolution layer를 Random initialize해도 결과가 나아지진 않는다. 그러나 이후 아주 사소한 개선만으로 엄청난 성능 향상을 이끌어 냈다.
+
+
+## 2.7.Success with Increasing Channel Number of Upconvolution Layer
+나도 내가 왜 그랬는지 모르겠지만 Upconvolution layer의 채널수가 downsample된 이후의 채널수인 21채널을 유지하면서 Upscale되고 있었다. 채널수가 안 맞는데 스킵 연결은 어떻게 했냐고? pool4에 1x1 Convolution을 해서 채널을 줄여줬다.(...)
+
+
+
+직관적으로 생각했을때 이미 21-Class segmentation이 완료된 피처맵의 채널을 다시 크게 늘렸다가 다시 21채널로 만들어 준다는 게 이해가 잘 가지 않아서 이런 짓을 했던 것 같다. 당시 ResNet 논문을 같이보면서 구현하고 있었는데 ResNet에서 본 Projection Shortcut을 무의식 중에 FCN에 코딩해놓고 스스로 까먹고 있었던 것 같다. 이 부분을 정상화 해줬더니 성능이 엄청나게 향상되어 논문에서 주장하는 성능을 재현할 수 있었다.
+
+
+
+Data augmentation도 적용 안했고 Weight initialization도 대충했고 심지어 Weight decay도 안 걸었으며 Initializer는 귀찮아서 Adam을 대충 갖다썼다. 이런데도 성능 재현률이 우수한 것이 정말 놀랍다! 그리고 FCN-32s를 일단 학습시키고 16s, 8s를 차례대로 전이학습시키며 잘 되는지 보는 실험은 안 해도 될 것 같다. FCN-8s를 바로 학습시켜도 학습이 잘 진행된다.
+
+## 2.8.Traning from Scratch
+이제 Traning from Scratch에 도전해보기로 한다.
+
+Reference Paper : [https://arxiv.org/abs/1411.4038]
