@@ -6,15 +6,15 @@ image_segmentation_project
 =============
 
 
-![img](./FCN_MSCOCO/images/result_aaa.jpg)
+![img](./FCN_MSCOCO/images/result_aaa.JPG)
 
 
 
-![img](./FCN_MSCOCO/images/result_aas.jpg)
+![img](./FCN_MSCOCO/images/result_aas.JPG)
 
 
 
-![img](./FCN_MSCOCO/images/result_aad.jpg)
+![img](./FCN_MSCOCO/images/result_aad.JPG)
 
 
 
