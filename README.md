@@ -15,7 +15,7 @@ image_segmentation_project
 ![img](./FCN_MSCOCO/images/result_aad.JPG)
 
 ##### Realtime Segmentation
-[![Video Label](http://img.youtube.com/vi/PUzMrX58Tms/1.jpg)](https://youtu.be/PUzMrX58Tms) Video Label
+[![Video Label](http://img.youtube.com/vi/PUzMrX58Tms/1.jpg)](https://youtu.be/PUzMrX58Tms) <== **click here**
 
 
 =============
