@@ -4,8 +4,8 @@ import tensorflow as tf
 import util
 from matplotlib.pyplot import imshow, hist, show,figure, subplot, subplots_adjust, setp
 
-batch_size = 5
-image_idx = 30
+batch_size = 3
+image_idx = 2
 masker = util.masker()
 
 img_loader = data_load.ImgLoader('pascal')

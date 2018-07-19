@@ -58,7 +58,28 @@ class ImgLoader :
             file = file_path[i]
             img = imread(file)
             img_list.append(img)
-        return img_list # 테스트용으로 일부러 작게함. 크게하면 터지기도 하고...
+        return img_list
+
+
+    def load_random_img_list(self, batch_size):
+        input_img_list = []
+        label_img_list = []
+
+        idx = np.arange(0, len(self.origin_path))
+        np.random.shuffle(idx)
+        idx = idx[:batch_size]
+
+        for i in idx:
+            input_file = self.origin_path[i]
+            label_file = self.class_path[i]
+
+            input_img = imread(input_file)
+            label_img = imread(label_file)
+
+            input_img_list.append(input_img)
+            label_img_list.append(label_img)
+
+        return input_img_list, label_img_list
 
 
     def calculate_size(self,img_list):
@@ -135,16 +156,19 @@ class ImgLoader :
             self.make_colormap()
 
 
-    def nextbatch(self, batch_size, itr):
-
-        origin_img_list = self.load_img_list(self.origin_path, batch_size, itr)
-        class_img_list = self.load_img_list(self.class_path, batch_size, itr)
+    def nextbatch(self, batch_size, itr, stochastic = False):
+        if (stochastic) :
+            origin_img_list, class_img_list = self.load_random_img_list(batch_size)
+        else:
+            origin_img_list = self.load_img_list(self.origin_path, batch_size, itr)
+            class_img_list = self.load_img_list(self.class_path, batch_size, itr)
 ##########################각종 Agumentation 기법을 여기넣으면 좋을듯###############################
         input_batch = self.make_batch_resize(origin_img_list, 320, 320, 1)
         class_batch = self.make_batch_resize(class_img_list, 320, 320, 0)
         class_label_batch = self.make_label_batch(class_batch)
 ##################################################################################################
         return input_batch, class_label_batch
+
 
     def nextbatch_for_inference(self, batch_size, itr):
 
