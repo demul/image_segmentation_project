@@ -28,7 +28,7 @@ image_segmentation_project
 ##### realtime.py
 USB 포트에 웹캠을 연결하고 바로 컴파일하면 된다.
 
-##### makenpy.py
+##### savenpy.py
 Inference되기 원하는 이미지 파일을 repository 폴더에 넣고 코드에
 ```c
 filename = 'aas.jpg'
