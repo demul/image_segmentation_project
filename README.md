@@ -17,8 +17,28 @@ image_segmentation_project
 ##### Realtime Segmentation
 [![Video Label](http://img.youtube.com/vi/PUzMrX58Tms/1.jpg)](https://youtu.be/PUzMrX58Tms) <== **click here**
 
-##### Checkpoint Link
+
+# Demo Guide
+
+## Just for Inference
+##### Checkpoint 파일 다운로드
 [https://drive.google.com/file/d/13M7CHNwTCYB6XP59oBVlOVmVplRvS9j4/view?usp=sharing]
+
+##### realtime.py
+USB 포트에 웹캠을 연결하고 바로 컴파일하면 된다.
+
+##### makenpy.py
+Inference되기 원하는 이미지 파일을 repository 폴더에 넣고 코드에
+```c
+filename = 'aas.jpg'
+```
+부분의 파일명('aas.jpg')을 이미지 파일명에 맞게 수정해준 뒤 컴파일하면 된다.
+
+##### inference.py
+PASCAL-VOC 데이터셋이 있어야 가능하다. 추후 정리해서 업로드 예정.
+
+## for Training
+PASCAL-VOC, MS-COCO 데이터셋 사용법과 함께 추후 정리해서 업로드 예정.
 
 
 =============
