@@ -17,6 +17,9 @@ image_segmentation_project
 ##### Realtime Segmentation
 [![Video Label](http://img.youtube.com/vi/PUzMrX58Tms/1.jpg)](https://youtu.be/PUzMrX58Tms) <== **click here**
 
+##### Checkpoint Link
+[https://drive.google.com/file/d/13M7CHNwTCYB6XP59oBVlOVmVplRvS9j4/view?usp=sharing]
+
 
 =============
 
