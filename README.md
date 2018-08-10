@@ -17,10 +17,11 @@ image_segmentation_project
 ##### Realtime Segmentation
 [![Video Label](http://img.youtube.com/vi/PUzMrX58Tms/1.jpg)](https://youtu.be/PUzMrX58Tms) <== **click here**
 
+==============================================================================
 
-# Demo Guide
+## Demo Guide
 
-## Just for Inference
+### Just for Inference
 ##### Checkpoint 파일 다운로드
 [https://drive.google.com/file/d/13M7CHNwTCYB6XP59oBVlOVmVplRvS9j4/view?usp=sharing]
 
@@ -37,11 +38,11 @@ filename = 'aas.jpg'
 ##### inference.py
 PASCAL-VOC 데이터셋이 있어야 가능하다. 추후 정리해서 업로드 예정.
 
-## for Training
+### for Training
 PASCAL-VOC, MS-COCO 데이터셋 사용법과 함께 추후 정리해서 업로드 예정.
 
 
-=============
+==============================================================================
 
 
 # 1.Intro
