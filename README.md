@@ -202,6 +202,6 @@ Data augmentation도 적용 안했고 Weight initialization도 대충했고 심�
 이제 Traning from Scratch에 도전해보기로 한다.
 
 ### 2.8.1.Result
-He Initialization하여 실험해 본 결과 잘 된다. 거의 동일한 Validation IOU가 나온다.
+He Initialization하여 실험해 본 결과 잘 된다. 거의 동일한 Validation IOU가 나온다. 논문에서 실험해보진 않았지만 직접 실험해 본 결과 생각했던대로 시간만 충분하다면 Training from Scratch도 가능하다. git 계정 문제로 귀가하여 Loss Log, IOU Log 업로드 예정. 
 
 Reference Paper : [https://arxiv.org/abs/1411.4038]
