@@ -201,4 +201,7 @@ Data augmentation도 적용 안했고 Weight initialization도 대충했고 심�
 ## 2.8.Traning from Scratch
 이제 Traning from Scratch에 도전해보기로 한다.
 
+### 2.8.1.Result
+He Initialization하여 실험해 본 결과 잘 된다. 거의 동일한 Validation IOU가 나온다.
+
 Reference Paper : [https://arxiv.org/abs/1411.4038]
