@@ -24,6 +24,7 @@ image_segmentation_project
 ### Just for Inference
 ##### Checkpoint 파일 다운로드
 [https://drive.google.com/file/d/13M7CHNwTCYB6XP59oBVlOVmVplRvS9j4/view?usp=sharing]
+repository 폴더에 model 폴더를 생성해서 넣는다.
 
 ##### realtime.py
 USB 포트에 웹캠을 연결하고 바로 컴파일하면 된다.
