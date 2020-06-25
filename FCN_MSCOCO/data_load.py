@@ -1,7 +1,8 @@
 import os
 import numpy as np
 from imageio import imread
-from skimage.transform import resize
+import cv2
+from cv2 import resize
 from matplotlib.pyplot import imshow, hist, show, figure
 import util
 
@@ -98,6 +99,14 @@ class ImgLoader :
 
 
     def make_batch_resize(self, img_list, height, width, interpolation=1):
+        if interpolation == 0:
+            interpolation = cv2.INTER_NEAREST
+        elif interpolation == 1:
+            interpolation = cv2.INTER_LINEAR
+        else:
+            print('NOT ALLOWED INTERPOLATION METHOD')
+            exit()
+
         batch=np.empty((
             len(img_list),
             height,
@@ -110,7 +119,7 @@ class ImgLoader :
                 img=np.tile(img, (3,1,1))              ###그냥 3 채널로 복사해버려서 가짜 흑백 이미지를 만들자. 새 차원을 추가하면서 복제할려면 이런식으로 해야 한다.
                 img=np.transpose(img, (1,2,0))         ###맨 앞차원이 늘어나게 되므로 맨 앞차원을 맨 뒷차원으로 전치시켜줘야한다.
 
-            batch[idx] = resize(img[:, :, :3], (height, width, 3), order=interpolation) *255 #png파일이라 R,G,B,alpha의 4차원 데이터이므로 alpha차원을 제거
+            batch[idx] = resize(img[:, :, :3], (height, width, 3), interpolation=interpolation) *255 #png파일이라 R,G,B,alpha의 4차원 데이터이므로 alpha차원을 제거
         ################################################################################################
         ####### class image의 경우 픽셀값이 소수가 되는 것을 방지하기 위해 NN으로 보간해야 한다!########
         ################################################################################################

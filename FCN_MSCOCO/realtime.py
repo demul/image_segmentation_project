@@ -1,10 +1,10 @@
 import data_load
-import FCN
+import FCN_inference
 import numpy as np
 import tensorflow as tf
 import util
 from imageio import imread
-from skimage.transform import resize
+from cv2 import resize
 from matplotlib.pyplot import imshow, hist, show,figure, subplot, subplots_adjust, setp
 import cv2
 
@@ -49,7 +49,7 @@ while (1):
     ret, X_test = capture.read()
 
 
-    X_test = resize(X_test[:, :, :], (320, 320, 3), order=1)
+    X_test = resize(X_test[:, :, :], (320, 320, 3))
 
     b, g, r = cv2.split(X_test)  # img파일을 b,g,r로 분리
     X_test2 = cv2.merge([r, g, b])  # b, r을 바꿔서 Merge
