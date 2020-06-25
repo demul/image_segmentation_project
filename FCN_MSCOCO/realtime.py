@@ -13,7 +13,7 @@ masker = util.masker()
 class_num = len(masker.class_color_list)
 
 
-FCN = FCN.FCN(batch_size, 0.001)
+FCN = FCN_inference.FCN(batch_size, 0.001)
 
 #
 # filename = 'aaa'
